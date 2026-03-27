@@ -1,6 +1,6 @@
 body {
-  background-color: #0a0a0a; /* Nero profondo */
-  color: #33ff00; /* Verde Matrix/Arcade classico */
+  background-color: #0a0a0a;
+  color: #33ff00;
   font-family: "Press Start 2P", cursive;
   display: flex;
   justify-content: center;
@@ -8,92 +8,44 @@ body {
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
+  /* Fondamentale per far scorrere la pagina quando si apre la tastiera */
   overflow-y: auto;
 }
 
 .arcade-container {
   text-align: center;
   border: 4px solid #33ff00;
-  padding: 40px;
-  box-shadow: 0 0 20px #33ff00; /* Effetto neon */
+  padding: 40px 20px;
+  box-shadow: 0 0 20px #33ff00;
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
 }
 
 .pixel-title {
-  font-size: 2rem;
-  margin-bottom: 50px;
-  color: #ff00ff; /* Rosa shocking anni '80 */
-  text-shadow: 3px 3px #00ffff; /* Effetto 3D glitch */
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  color: #ff00ff;
+  text-shadow: 3px 3px #00ffff;
 }
 
-/* Animazione lampeggiante per il testo */
-.insert-coin {
-  font-size: 1rem;
-  animation: blink 1s infinite;
+.mission-text {
+  font-size: 0.6rem;
+  line-height: 1.6;
+  color: #ff00ff;
+  margin-bottom: 25px;
+  text-align: center;
+  text-transform: uppercase;
+  animation: blinkMission 1.5s infinite;
 }
 
-@keyframes blink {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
+@keyframes blinkMission {
+  0%,
   100% {
     opacity: 1;
   }
-}
-
-.construction-section {
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.construction-section h2 {
-  color: #00ffff;
-  font-size: 1.5rem;
-  text-shadow: 2px 2px #ff00ff;
-}
-
-.construction-section p {
-  font-size: 0.8rem;
-  color: #ffffff;
-  line-height: 1.8;
-}
-
-.high-score-board {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  border: 2px dashed #ff00ff;
-  padding: 10px;
-  text-align: center;
-}
-
-.score-label {
-  font-size: 0.7rem;
-  color: #00ffff;
-  margin-bottom: 5px;
-}
-
-.score-number {
-  font-size: 1.2rem;
-  color: #ffffff;
-  letter-spacing: 2px;
-}
-
-/* Media query per gestire gli schermi più piccoli e prevenire sovrapposizioni */
-@media (max-width: 850px), (max-height: 650px) {
-  body {
-    flex-direction: column;
-    padding: 30px 0;
-  }
-
-  .high-score-board {
-    position: static;
-    margin-bottom: 30px;
+  50% {
+    opacity: 0.5;
   }
 }
 
@@ -101,26 +53,35 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
-  margin-top: 20px;
-  padding-bottom: 300px; /* AGGIUNGI QUESTO: crea spazio "invisibile" per la tastiera */
+  gap: 10px;
+  /* Questo spazio permette di scorrere sopra la tastiera mobile */
+  padding-bottom: 50px;
+}
+
+.input-label {
+  font-size: 0.55rem;
+  color: #33ff00;
+  margin-top: 10px;
+  text-transform: uppercase;
 }
 
 .arcade-input {
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.8);
   border: 3px solid #33ff00;
   color: #33ff00;
   font-family: "Press Start 2P", cursive;
-  padding: 15px;
+  padding: 12px;
   width: 90%;
-  max-width: 400px;
+  max-width: 350px;
   text-align: center;
   outline: none;
-  box-shadow: 0 0 10px rgba(51, 255, 0, 0.2);
+  font-size: 0.7rem;
+  margin-bottom: 10px;
 }
 
 .arcade-input:focus {
-  box-shadow: 0 0 20px #33ff00;
+  box-shadow: 0 0 15px #33ff00;
+  border-color: #00ffff;
 }
 
 .start-btn {
@@ -131,7 +92,8 @@ body {
   font-family: "Press Start 2P", cursive;
   cursor: pointer;
   box-shadow: 5px 5px 0 #005500;
-  transition: 0.1s;
+  margin-top: 15px;
+  font-size: 0.8rem;
 }
 
 .start-btn:active {
@@ -139,25 +101,25 @@ body {
   transform: translate(3px, 3px);
 }
 
-.mission-text {
-  font-size: 0.65rem;
-  line-height: 1.4;
-  color: #ff00ff; /* Rosa neon per staccare dal verde */
-  margin-bottom: 20px;
-  text-align: center;
-  max-width: 300px;
-  text-transform: uppercase;
-  animation: blink 1.5s infinite; /* Facciamola lampeggiare stile arcade */
+.high-score-board {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 2px dashed #ff00ff;
+  padding: 10px;
 }
 
-@keyframes blink {
-  0% {
-    opacity: 1;
+@media (max-width: 600px) {
+  .pixel-title {
+    font-size: 1.2rem;
   }
-  50% {
-    opacity: 0.5;
+  .arcade-container {
+    padding: 20px 10px;
   }
-  100% {
-    opacity: 1;
+  .high-score-board {
+    position: relative;
+    margin-bottom: 20px;
+    top: 0;
+    right: 0;
   }
 }
