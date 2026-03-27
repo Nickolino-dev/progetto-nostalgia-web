@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Progetto Nostalgia | Work in Progress</title>
     <link rel="stylesheet" href="style.css" />
+    <script type="module" src="script.js" defer></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
@@ -22,13 +23,44 @@
       </header>
 
       <main>
-        <p class="insert-coin">WORK IN PROGRESS...</p>
+        <p class="insert-coin">DIVENTA PROTAGONISTA</p>
 
-        <div class="construction-section">
-          <h2>STAY TUNED</h2>
-          <p>Stiamo preparando<br /><br />qualcosa di speciale!</p>
+        <div class="input-section">
+          <p class="mission-text">
+            IL TUO RICORDO DIVENTERÀ UN VIDEO SU TIKTOK! 🎬
+          </p>
+
+          <input
+            type="text"
+            id="userName"
+            placeholder="IL TUO NOME..."
+            class="arcade-input"
+          />
+
+          <p class="input-label">COSA VUOI RIVEDERE DEGLI ANNI '90?</p>
+          <input
+            type="text"
+            id="userSuggestion"
+            placeholder="ES: LE CRYSTAL BALL..."
+            class="arcade-input"
+          />
+
+          <button id="submitBtn" class="start-btn">INVIA GETTONE</button>
+
+          <p
+            id="confirmation"
+            style="
+              display: none;
+              font-size: 0.8rem;
+              color: #ff00ff;
+              margin-top: 20px;
+            "
+          >
+            GETTONE ACCETTATO! CI VEDIAMO NEI PER TE! 🎥
+          </p>
         </div>
       </main>
+      <script type="module" src="script.js"></script>
     </div>
   </body>
 </html>
