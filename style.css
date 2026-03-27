@@ -101,8 +101,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  margin-top: 30px;
+  gap: 15px;
+  margin-top: 20px;
+  padding-bottom: 300px; /* AGGIUNGI QUESTO: crea spazio "invisibile" per la tastiera */
 }
 
 .arcade-input {
