@@ -1,0 +1,98 @@
+body {
+  background-color: #0a0a0a; /* Nero profondo */
+  color: #33ff00; /* Verde Matrix/Arcade classico */
+  font-family: "Press Start 2P", cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.arcade-container {
+  text-align: center;
+  border: 4px solid #33ff00;
+  padding: 40px;
+  box-shadow: 0 0 20px #33ff00; /* Effetto neon */
+}
+
+.pixel-title {
+  font-size: 2rem;
+  margin-bottom: 50px;
+  color: #ff00ff; /* Rosa shocking anni '80 */
+  text-shadow: 3px 3px #00ffff; /* Effetto 3D glitch */
+}
+
+/* Animazione lampeggiante per il testo */
+.insert-coin {
+  font-size: 1rem;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.construction-section {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.construction-section h2 {
+  color: #00ffff;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px #ff00ff;
+}
+
+.construction-section p {
+  font-size: 0.8rem;
+  color: #ffffff;
+  line-height: 1.8;
+}
+
+.high-score-board {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: 2px dashed #ff00ff;
+  padding: 10px;
+  text-align: center;
+}
+
+.score-label {
+  font-size: 0.7rem;
+  color: #00ffff;
+  margin-bottom: 5px;
+}
+
+.score-number {
+  font-size: 1.2rem;
+  color: #ffffff;
+  letter-spacing: 2px;
+}
+
+/* Media query per gestire gli schermi più piccoli e prevenire sovrapposizioni */
+@media (max-width: 850px), (max-height: 650px) {
+  body {
+    flex-direction: column;
+    padding: 30px 0;
+  }
+
+  .high-score-board {
+    position: static;
+    margin-bottom: 30px;
+  }
+}
