@@ -80,3 +80,24 @@ submitBtn.addEventListener("click", async () => {
     alert("Socio, inserisci nome e idea per continuare!");
   }
 });
+
+import {
+  query,
+  orderBy,
+  limit,
+  onSnapshot,
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// Funzione per mostrare i soci in tempo reale
+const sociList = document.getElementById("sociList");
+const q = query(collection(db, "richieste"), orderBy("data", "desc"), limit(5));
+
+onSnapshot(q, (snapshot) => {
+  sociList.innerHTML = ""; // Pulisce la lista
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+    const li = document.createElement("li");
+    li.textContent = `${data.utente} prenota: ${data.idea}`;
+    sociList.appendChild(li);
+  });
+});
