@@ -28,13 +28,28 @@ const inputField = document.getElementById("userSuggestion");
 const submitBtn = document.getElementById("submitBtn");
 const modal = document.getElementById("sociModal");
 const btnModal = document.getElementById("openModal");
-const spanClose = document.querySelector(".close-btn");
+const badge = document.getElementById("notificationBadge");
 const sociList = document.getElementById("sociList");
+const spanClose = document.querySelector(".close-btn");
 
-btnModal.onclick = () => (modal.style.display = "block");
-spanClose.onclick = () => (modal.style.display = "none");
+let newItemsCount = 0;
+let isModalOpen = false;
+
+btnModal.onclick = () => {
+  modal.style.display = "block";
+  isModalOpen = true;
+  newItemsCount = 0;
+  badge.style.display = "none";
+};
+spanClose.onclick = () => {
+  modal.style.display = "none";
+  isModalOpen = false;
+};
 window.onclick = (e) => {
-  if (e.target == modal) modal.style.display = "none";
+  if (e.target == modal) {
+    modal.style.display = "none";
+    isModalOpen = false;
+  }
 };
 
 const q = query(
@@ -43,6 +58,15 @@ const q = query(
   limit(12),
 );
 onSnapshot(q, (snapshot) => {
+  if (!isModalOpen && sociList.innerHTML !== "") {
+    snapshot.docChanges().forEach((change) => {
+      if (change.type === "added") {
+        newItemsCount++;
+        badge.innerText = newItemsCount;
+        badge.style.display = "block";
+      }
+    });
+  }
   sociList.innerHTML = "";
   snapshot.forEach((doc) => {
     const data = doc.data();
