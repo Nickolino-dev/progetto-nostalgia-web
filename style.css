@@ -30,7 +30,6 @@ body {
   text-shadow: 2px 2px #00ffff;
 }
 
-/* HIGH SCORE BOARD */
 .high-score-board {
   border: 2px dashed #ff00ff;
   padding: 8px;
@@ -49,7 +48,6 @@ body {
   letter-spacing: 2px;
 }
 
-/* NOTIFICATION BADGE */
 .notification-wrapper {
   position: relative;
   display: inline-block;
@@ -64,7 +62,6 @@ body {
   padding: 4px 6px;
   border-radius: 50%;
   border: 1px solid #fff;
-  box-shadow: 0 0 10px #ff00ff;
   animation: pulse 1s infinite;
 }
 @keyframes pulse {
@@ -99,6 +96,26 @@ body {
   color: #33ff00;
   margin-top: 5px;
 }
+
+/* Warning per i distratti */
+.warning-text {
+  font-size: 0.35rem;
+  color: #ffff00;
+  margin-bottom: -5px;
+  animation: blink 1.5s infinite;
+}
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .arcade-input {
   background: #000;
   border: 2px solid #33ff00;
@@ -122,7 +139,6 @@ body {
   box-shadow: 4px 4px 0 #005500;
 }
 
-/* MODAL */
 .modal {
   display: none;
   position: fixed;
@@ -139,7 +155,7 @@ body {
   padding: 15px;
   border: 2px solid #ff00ff;
   width: 90%;
-  max-width: 400px;
+  max-width: 420px;
 }
 .close-btn {
   color: #00ffff;
@@ -148,16 +164,15 @@ body {
   cursor: pointer;
 }
 
-/* LISTA SINGOLA RIGA */
 .soci-list {
   list-style: none;
   padding: 0;
   margin-top: 15px;
 }
 .soci-list li {
-  font-size: 0.42rem;
+  font-size: 0.38rem;
   border-bottom: 1px solid #222;
-  padding: 8px 0;
+  padding: 10px 0;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
@@ -165,7 +180,7 @@ body {
 }
 .p-num {
   color: #ffff00;
-  margin-right: 5px;
+  margin-right: 4px;
 }
 .p-nick {
   color: #ff00ff;
@@ -173,3 +188,52 @@ body {
 .p-idea {
   color: #00ffff;
 }
+
+/* Status Tags */
+.status-tag {
+  font-size: 0.32rem;
+  margin-left: 5px;
+  padding: 2px;
+}
+.status-0 {
+  color: #ffff00;
+} /* WAITING */
+.status-1 {
+  color: #00ffff;
+  border: 1px solid #00ffff;
+} /* LOADING */
+.status-2 {
+  color: #33ff00;
+  text-shadow: 0 0 5px #33ff00;
+} /* ONLINE */
+
+.admin-panel {
+  max-width: 600px !important;
+}
+.admin-controls {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
+}
+.btn-adm {
+  font-family: "Press Start 2P";
+  font-size: 0.4rem;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  color: #000;
+}
+.wait {
+  background: #ffff00;
+} /* Giallo */
+.load {
+  background: #00ffff;
+} /* Ciano */
+.online {
+  background: #33ff00;
+} /* Verde */
+.del {
+  background: #ff0000;
+  color: #fff;
+  margin-left: auto;
+} /* Rosso */

@@ -45,12 +45,6 @@ spanClose.onclick = () => {
   modal.style.display = "none";
   isModalOpen = false;
 };
-window.onclick = (e) => {
-  if (e.target == modal) {
-    modal.style.display = "none";
-    isModalOpen = false;
-  }
-};
 
 const q = query(
   collection(db, "richieste"),
@@ -74,7 +68,18 @@ onSnapshot(q, (snapshot) => {
     const pNum = data.playerPos
       ? String(data.playerPos).padStart(3, "0")
       : "???";
-    li.innerHTML = `<span class="p-num">P${pNum}.</span> <span class="p-nick">${data.utente}</span> - <span class="p-idea">${data.idea}</span>`;
+
+    let sText = "[WAITING]";
+    let sClass = "status-0";
+    if (data.status === 1) {
+      sText = "[LOADING...]";
+      sClass = "status-1";
+    } else if (data.status === 2) {
+      sText = "[ONLINE! ✅]";
+      sClass = "status-2";
+    }
+
+    li.innerHTML = `<span class="p-num">P${pNum}.</span> <span class="p-nick">${data.utente}</span> - <span class="p-idea">${data.idea}</span> <span class="status-tag ${sClass}">${sText}</span>`;
     sociList.appendChild(li);
   });
 });
@@ -91,6 +96,7 @@ submitBtn.addEventListener("click", async () => {
         utente: nome,
         idea: suggestion,
         playerPos: snap.data().count + 1,
+        status: 0,
         data: serverTimestamp(),
       });
       nameField.value = "";
