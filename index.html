@@ -3,9 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Progetto Nostalgia | Work in Progress</title>
+    <title>Progetto Nostalgia - Hall of Fame</title>
     <link rel="stylesheet" href="style.css" />
-    <script type="module" src="script.js" defer></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
@@ -13,60 +12,64 @@
   </head>
   <body>
     <div class="arcade-container">
-      <header>
-        <h1 class="pixel-title">PROGETTO NOSTALGIA</h1>
+      <div class="high-score-board">
+        <div class="score-label">COMMUNITY SCORE</div>
+        <div class="score-number">1024</div>
+      </div>
+      <h1 class="pixel-title">PROGETTO NOSTALGIA</h1>
 
-        <div class="high-score-board">
-          <div class="score-label">FOLLOWER</div>
-          <div class="score-number">001019</div>
-        </div>
-      </header>
+      <button id="openModal" class="hall-btn">🏆 HALL OF FAME</button>
 
-      <main>
-        <p class="insert-coin">DIVENTA PROTAGONISTA</p>
+      <p class="mission-text">
+        Archivio Emozioni Anni '90. <br />
+        Inserisci il gettone e scala la classifica!
+      </p>
 
-        <div class="input-section">
-          <p class="mission-text">
-            IL TUO RICORDO DIVENTERÀ UN VIDEO SU TIKTOK! 🎬
-          </p>
+      <div class="input-section">
+        <label class="input-label">NICKNAME PLAYER:</label>
+        <input
+          type="text"
+          id="userName"
+          class="arcade-input"
+          placeholder="ES: TUONOME"
+          maxlength="15"
+        />
 
-          <input
-            type="text"
-            id="userName"
-            placeholder="IL TUO NOME..."
-            class="arcade-input"
-          />
+        <label class="input-label">COSA VUOI RIVEDERE?</label>
+        <input
+          type="text"
+          id="userSuggestion"
+          class="arcade-input"
+          placeholder="ES: MAXIBON ACCORSI"
+        />
 
-          <p class="input-label">COSA VUOI RIVEDERE DEGLI ANNI '90?</p>
-          <input
-            type="text"
-            id="userSuggestion"
-            placeholder="ES: LE CRYSTAL BALL..."
-            class="arcade-input"
-          />
-
-          <button id="submitBtn" class="start-btn">INVIA GETTONE</button>
-
-          <p
-            id="confirmation"
-            style="
-              display: none;
-              font-size: 0.8rem;
-              color: #ff00ff;
-              margin-top: 20px;
-            "
-          >
-            GETTONE ACCETTATO! CI VEDIAMO NEI PER TE! 🎥
-          </p>
-        </div>
-        <div class="hall-of-fame">
-          <p class="score-label">--- ULTIMI SOCI ENTRATI ---</p>
-          <ul id="sociList" class="soci-list">
-            <li>CARICAMENTO...</li>
-          </ul>
-        </div>
-      </main>
-      <script type="module" src="script.js"></script>
+        <button id="submitBtn" class="start-btn">INVIA GETTONE</button>
+        <p
+          id="confirmation"
+          style="
+            display: none;
+            color: #ff00ff;
+            font-size: 0.6rem;
+            margin-top: 10px;
+          "
+        >
+          GETTONE ACCETTATO! 🎟️
+        </p>
+      </div>
     </div>
+
+    <div id="sociModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2 class="pixel-title" style="font-size: 0.8rem; margin-top: 10px">
+          TOP PLAYERS
+        </h2>
+        <ul id="sociList" class="soci-list">
+          <li>CARICAMENTO SCORE...</li>
+        </ul>
+      </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
   </body>
 </html>

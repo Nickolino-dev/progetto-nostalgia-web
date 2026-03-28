@@ -1,163 +1,146 @@
-/* RESET E BASE */
 html,
 body {
-  height: auto !important;
+  height: auto;
   min-height: 100vh;
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
   margin: 0;
   background-color: #0a0a0a;
   color: #33ff00;
   font-family: "Press Start 2P", cursive;
 }
-
 body {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Allineamento in alto per facilitare lo scroll */
+  align-items: flex-start;
   padding-top: 20px;
 }
-
 .arcade-container {
   text-align: center;
   border: 4px solid #33ff00;
-  padding: 30px 15px;
+  padding: 25px 10px;
   box-shadow: 0 0 20px #33ff00;
   width: 90%;
-  max-width: 500px;
-  margin-bottom: 50px;
+  max-width: 450px;
 }
-
 .pixel-title {
-  font-size: 1.6rem;
-  margin-bottom: 25px;
-  color: #ff00ff;
-  text-shadow: 3px 3px #00ffff;
-}
-
-.mission-text {
-  font-size: 0.55rem;
-  line-height: 1.5;
-  color: #ff00ff;
+  font-size: 1.2rem;
   margin-bottom: 20px;
-  text-align: center;
-  text-transform: uppercase;
-  animation: blinkMission 1.5s infinite;
+  color: #ff00ff;
+  text-shadow: 2px 2px #00ffff;
 }
-
-@keyframes blinkMission {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
+.hall-btn {
+  background: transparent;
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.5rem;
+  padding: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  box-shadow: 0 0 5px #00ffff;
 }
-
 .input-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  /* Spazio enorme sotto per permettere lo scroll sopra la tastiera di TikTok */
-  padding-bottom: 70vh;
+  padding-bottom: 60vh;
 }
-
 .input-label {
-  font-size: 0.5rem;
+  font-size: 0.4rem;
   color: #33ff00;
-  margin-top: 10px;
-  text-transform: uppercase;
 }
-
 .arcade-input {
-  background-color: rgba(0, 0, 0, 0.9);
-  border: 3px solid #33ff00;
+  background: #000;
+  border: 2px solid #33ff00;
   color: #33ff00;
-  font-family: "Press Start 2P", cursive;
-  padding: 12px;
-  width: 85%;
-  max-width: 320px;
-  text-align: center;
-  outline: none;
-  font-size: 0.7rem;
-  margin-bottom: 5px;
-  -webkit-appearance: none; /* Rimuove stili strani su iOS */
+  font-family: "Press Start 2P";
+  padding: 10px;
+  width: 80%;
+  font-size: 0.6rem;
   border-radius: 0;
+  outline: none;
 }
-
-.arcade-input:focus {
-  box-shadow: 0 0 15px #33ff00;
-  border-color: #00ffff;
-}
-
 .start-btn {
-  background-color: #33ff00;
+  background: #33ff00;
   color: #000;
   border: none;
-  padding: 15px 25px;
-  font-family: "Press Start 2P", cursive;
+  padding: 12px 20px;
+  font-family: "Press Start 2P";
   cursor: pointer;
-  box-shadow: 5px 5px 0 #005500;
-  margin-top: 20px;
-  font-size: 0.75rem;
+  font-size: 0.6rem;
+  margin-top: 15px;
+  box-shadow: 4px 4px 0 #005500;
 }
 
-.start-btn:active {
-  box-shadow: 2px 2px 0 #005500;
-  transform: translate(3px, 3px);
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
 }
-
-.high-score-board {
-  border: 2px dashed #ff00ff;
-  padding: 8px;
-  margin-bottom: 20px;
-  display: inline-block;
+.modal-content {
+  background: #000;
+  margin: 15% auto;
+  padding: 15px;
+  border: 2px solid #ff00ff;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 15px #ff00ff;
 }
-
-.insert-coin {
-  font-size: 0.8rem;
-  margin: 15px 0;
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-@media (max-width: 600px) {
-  .pixel-title {
-    font-size: 1.1rem;
-  }
-  .arcade-container {
-    padding: 15px 10px;
-  }
-}
-
-.hall-of-fame {
-  margin-top: 30px;
-  border-top: 2px dashed #33ff00;
-  padding-top: 20px;
-  text-align: left;
+.close-btn {
+  color: #00ffff;
+  float: right;
+  font-size: 18px;
+  cursor: pointer;
 }
 
 .soci-list {
   list-style: none;
   padding: 0;
-  font-size: 0.6rem;
-  color: #00ffff; /* Colore diverso per staccare */
-  line-height: 1.6;
+  margin-top: 20px;
+}
+.soci-list li {
+  font-size: 0.45rem;
+  border-bottom: 1px solid #222;
+  padding: 10px 0;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.p-num {
+  color: #ffff00;
+  margin-right: 5px;
+}
+.p-nick {
+  color: #ff00ff;
+}
+.p-idea {
+  color: #00ffff;
 }
 
-.soci-list li {
-  margin-bottom: 8px;
-  border-left: 3px solid #ff00ff;
-  padding-left: 10px;
+.high-score-board {
+  border: 2px dashed #ff00ff;
+  padding: 10px;
+  display: inline-block;
+  margin-bottom: 20px;
+  background: rgba(255, 0, 255, 0.05);
+}
+
+.score-label {
+  font-size: 0.5rem;
+  color: #00ffff;
+  margin-bottom: 5px;
+}
+
+.score-number {
+  font-size: 1.1rem;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px #ff00ff;
 }
