@@ -3,57 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Progetto Nostalgia - Inserisci Gettone</title>
+    <title>Progetto Nostalgia - Official Site</title>
     <link rel="stylesheet" href="style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
   </head>
-  <body>
-    <div class="arcade-container">
-      <h1 class="pixel-title">PROGETTO NOSTALGIA</h1>
+  <body class="home-layout">
+    <div class="hero-container">
+      <h1 class="pixel-title main-logo">PROGETTO NOSTALGIA</h1>
 
-      <div class="score-board">
-        <span class="score-label">COMMUNITY SCORE:</span>
-        <span class="score-number">0</span>
+      <div class="manifesto-box">
+        <p class="typing-text">
+          NON LASCIAMO CHE I NOSTRI RICORDI FINISCANO NEL DIMENTICATOIO...
+        </p>
+        <p class="sub-text">
+          Tu inserisci l'idea, io accendo la macchina del tempo.
+        </p>
       </div>
 
-      <div class="input-section">
-        <input
-          type="text"
-          id="nickname"
-          placeholder="NICKNAME..."
-          class="arcade-input"
-        />
-        <textarea
-          id="idea"
-          placeholder="COSA TI RICORDA IL PASSATO?"
-          class="arcade-input"
-        ></textarea>
-        <button id="submitBtn" class="start-btn">INVIA GETTONE</button>
+      <div class="cta-section">
+        <a href="sala-giochi.html" class="big-arcade-btn"
+          >ENTRA NELLA SALA GIOCHI 🕹️</a
+        >
+      </div>
 
-        <div class="live-feed-container">
-          <h3 class="feed-title">ULTIMI GETTONI:</h3>
-          <ul id="homeFeed" class="home-feed"></ul>
+      <div class="features-grid">
+        <div class="feat-card">
+          <span>🏆</span>
+          <h4>HALL OF FAME</h4>
+          <p>Entra nella storia dei player.</p>
+        </div>
+        <div class="feat-card">
+          <span>🎬</span>
+          <h4>DAILY VIDEO</h4>
+          <p>Ogni giorno un nuovo ricordo.</p>
         </div>
       </div>
 
-      <button id="hallOfFameBtn" class="hall-btn">
-        🏆 HALL OF FAME
-        <span id="hallBadge" class="badge-new"></span>
-      </button>
-    </div>
-
-    <div id="hallModal" class="modal">
-      <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2 class="pixel-title" style="font-size: 0.8rem">THE LEGENDS</h2>
-        <ul id="sociList" class="soci-list"></ul>
-      </div>
+      <footer class="footer-simple">
+        <p>© 2026 - CREATED BY NICO - FULL STACK NOSTALGIA</p>
+      </footer>
     </div>
 
     <script defer src="/_vercel/insights/script.js"></script>
-    <script type="module" src="script.js"></script>
   </body>
 </html>

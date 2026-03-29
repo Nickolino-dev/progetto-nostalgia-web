@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Progetto Nostalgia - Inserisci Gettone</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="arcade-container">
+      <a href="index.html" class="back-home-link">⬅️ HOME</a>
+      <h1 class="pixel-title">PROGETTO NOSTALGIA</h1>
+
+      <div class="score-board">
+        <span class="score-label">COMMUNITY SCORE:</span>
+        <span class="score-number">0</span>
+      </div>
+
+      <div class="input-section">
+        <input
+          type="text"
+          id="nickname"
+          placeholder="NICKNAME..."
+          class="arcade-input"
+        />
+        <textarea
+          id="idea"
+          placeholder="COSA TI RICORDA IL PASSATO?"
+          class="arcade-input"
+        ></textarea>
+        <button id="submitBtn" class="start-btn">INVIA GETTONE</button>
+
+        <div class="live-feed-container">
+          <h3 class="feed-title">ULTIMI GETTONI:</h3>
+          <ul id="homeFeed" class="home-feed"></ul>
+        </div>
+      </div>
+
+      <button id="hallOfFameBtn" class="hall-btn">
+        🏆 HALL OF FAME
+        <span id="hallBadge" class="badge-new"></span>
+      </button>
+    </div>
+
+    <div id="hallModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 class="pixel-title" style="font-size: 0.8rem">THE LEGENDS</h2>
+        <ul id="sociList" class="soci-list"></ul>
+      </div>
+    </div>
+
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
