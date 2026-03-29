@@ -22,36 +22,38 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// PROTEZIONE SEMPLICE
-const pass = prompt("INSERISCI CHIAVE DEL CABINATO:");
+const pass = prompt("CHIAVE DEL CABINATO:");
 if (pass !== "NICO2026") {
-  // <--- CAMBIA QUESTA CON LA TUA PASSWORD
-  alert("ACCESSO NEGATO!");
   window.location.href = "index.html";
 }
 
-const adminList = document.getElementById("adminList");
+// AGGIORNA FOLLOWER
+document.getElementById("updateScoreBtn").onclick = async () => {
+  const val = document.getElementById("newFollowers").value;
+  if (val) {
+    await updateDoc(doc(db, "stats", "community"), {
+      followers: parseInt(val),
+    });
+    alert("SCORE AGGIORNATO!");
+  }
+};
 
-// Carica la lista con i bottoni
+// LISTA PLAYER CON BOTTONI
 onSnapshot(
   query(collection(db, "richieste"), orderBy("data", "desc")),
-  (snapshot) => {
+  (snap) => {
+    const adminList = document.getElementById("adminList");
     adminList.innerHTML = "";
-    snapshot.forEach((documento) => {
-      const data = documento.data();
-      const id = documento.id;
+    snap.forEach((d) => {
+      const data = d.data();
       const li = document.createElement("li");
-      li.style.whiteSpace = "normal"; // Permette di vedere i bottoni
-
       li.innerHTML = `
-            <div style="margin-bottom: 10px;">
-                <span class="p-num">P${data.playerPos}</span> <b>${data.utente}</b>: ${data.idea}
-            </div>
+            <div style="font-size:0.35rem">P${data.playerPos} <b>${data.utente}</b>: ${data.idea}</div>
             <div class="admin-controls">
-                <button class="btn-adm wait" onclick="changeStatus('${id}', 0)">W</button>
-                <button class="btn-adm load" onclick="changeStatus('${id}', 1)">L</button>
-                <button class="btn-adm online" onclick="changeStatus('${id}', 2)">O</button>
-                <button class="btn-adm del" onclick="removeEntry('${id}')">X</button>
+                <button onclick="changeStatus('${d.id}', 0)" class="btn-adm wait">W</button>
+                <button onclick="changeStatus('${d.id}', 1)" class="btn-adm load">L</button>
+                <button onclick="changeStatus('${d.id}', 2)" class="btn-adm online">O</button>
+                <button onclick="removeEntry('${d.id}')" class="btn-adm del">X</button>
             </div>
         `;
       adminList.appendChild(li);
@@ -59,14 +61,9 @@ onSnapshot(
   },
 );
 
-// Funzioni globali per i bottoni
-window.changeStatus = async (id, newStatus) => {
-  const docRef = doc(db, "richieste", id);
-  await updateDoc(docRef, { status: newStatus });
+window.changeStatus = async (id, s) => {
+  await updateDoc(doc(db, "richieste", id), { status: s });
 };
-
 window.removeEntry = async (id) => {
-  if (confirm("ELIMINARE PLAYER?")) {
-    await deleteDoc(doc(db, "richieste", id));
-  }
+  if (confirm("ELIMINO?")) await deleteDoc(doc(db, "richieste", id));
 };

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Progetto Nostalgia - Hall of Fame</title>
+    <title>Progetto Nostalgia - Inserisci Gettone</title>
     <link rel="stylesheet" href="style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
@@ -14,56 +14,41 @@
     <div class="arcade-container">
       <h1 class="pixel-title">PROGETTO NOSTALGIA</h1>
 
-      <div class="high-score-board">
-        <div class="score-label">COMMUNITY SCORE</div>
-        <div class="score-number">1026</div>
-      </div>
-
-      <div class="notification-wrapper">
-        <button id="openModal" class="hall-btn">🏆 HALL OF FAME</button>
-        <span id="notificationBadge" class="badge" style="display: none"
-          >0</span
-        >
+      <div class="score-board">
+        <span class="score-label">COMMUNITY SCORE:</span>
+        <span class="score-number">0</span>
       </div>
 
       <div class="input-section">
-        <label class="input-label">NICKNAME PLAYER:</label>
         <input
           type="text"
-          id="userName"
+          id="nickname"
+          placeholder="NICKNAME..."
           class="arcade-input"
-          placeholder="ES: NICO90"
-          maxlength="12"
         />
-
-        <label class="input-label">COSA VUOI RIVEDERE?</label>
-        <p class="warning-text">⚠️ CONTROLLA SE È GIÀ NELLA LISTA!</p>
-        <input
-          type="text"
-          id="userSuggestion"
+        <textarea
+          id="idea"
+          placeholder="COSA TI RICORDA IL PASSATO?"
           class="arcade-input"
-          placeholder="ES: CALIPPO"
-        />
-
+        ></textarea>
         <button id="submitBtn" class="start-btn">INVIA GETTONE</button>
-        <p
-          id="confirmation"
-          style="
-            display: none;
-            color: #ff00ff;
-            font-size: 0.5rem;
-            margin-top: 10px;
-          "
-        >
-          GETTONE ACCETTATO! 🎟️
-        </p>
+
+        <div class="live-feed-container">
+          <h3 class="feed-title">ULTIMI GETTONI:</h3>
+          <ul id="homeFeed" class="home-feed"></ul>
+        </div>
       </div>
+
+      <button id="hallOfFameBtn" class="hall-btn">
+        🏆 HALL OF FAME
+        <span id="hallBadge" class="badge-new"></span>
+      </button>
     </div>
 
-    <div id="sociModal" class="modal">
+    <div id="hallModal" class="modal">
       <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <h2 class="pixel-title" style="font-size: 0.7rem">TOP PLAYERS</h2>
+        <span class="close-modal">&times;</span>
+        <h2 class="pixel-title" style="font-size: 0.8rem">THE LEGENDS</h2>
         <ul id="sociList" class="soci-list"></ul>
       </div>
     </div>

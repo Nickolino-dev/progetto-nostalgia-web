@@ -3,11 +3,10 @@ import {
   getFirestore,
   collection,
   addDoc,
-  serverTimestamp,
   query,
   orderBy,
-  limit,
   onSnapshot,
+  doc,
   getCountFromServer,
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
@@ -23,92 +22,91 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const nameField = document.getElementById("userName");
-const inputField = document.getElementById("userSuggestion");
+// ELEMENTI DOM
+const scoreDisplay = document.querySelector(".score-number");
+const nickInput = document.getElementById("nickname");
+const ideaInput = document.getElementById("idea");
 const submitBtn = document.getElementById("submitBtn");
-const modal = document.getElementById("sociModal");
-const btnModal = document.getElementById("openModal");
-const badge = document.getElementById("notificationBadge");
 const sociList = document.getElementById("sociList");
-const spanClose = document.querySelector(".close-btn");
+const homeFeed = document.getElementById("homeFeed");
+const hallModal = document.getElementById("hallModal");
+const hallBtn = document.getElementById("hallOfFameBtn");
+const closeBtn = document.querySelector(".close-modal");
+const hallBadge = document.getElementById("hallBadge");
 
-let newItemsCount = 0;
-let isModalOpen = false;
+// 1. LEGGI FOLLOWER IN TEMPO REALE
+onSnapshot(doc(db, "stats", "community"), (doc) => {
+  if (doc.exists()) scoreDisplay.innerText = doc.data().followers;
+});
 
-btnModal.onclick = () => {
-  modal.style.display = "block";
-  isModalOpen = true;
-  newItemsCount = 0;
-  badge.style.display = "none";
-};
-spanClose.onclick = () => {
-  modal.style.display = "none";
-  isModalOpen = false;
-};
+// 2. INVIA GETTONE
+submitBtn.addEventListener("click", async () => {
+  const utente = nickInput.value.trim();
+  const idea = ideaInput.value.trim();
 
-const q = query(
-  collection(db, "richieste"),
-  orderBy("data", "desc"),
-  limit(12),
-);
-onSnapshot(q, (snapshot) => {
-  if (!isModalOpen && sociList.innerHTML !== "") {
-    snapshot.docChanges().forEach((change) => {
-      if (change.type === "added") {
-        newItemsCount++;
-        badge.innerText = newItemsCount;
-        badge.style.display = "block";
-      }
+  if (utente && idea) {
+    submitBtn.disabled = true;
+    submitBtn.innerText = "INVIO...";
+
+    const snapshot = await getCountFromServer(collection(db, "richieste"));
+    const nextPos = snapshot.data().count + 1;
+
+    await addDoc(collection(db, "richieste"), {
+      utente,
+      idea,
+      playerPos: nextPos,
+      status: 0,
+      data: Date.now(),
     });
+
+    nickInput.value = "";
+    ideaInput.value = "";
+    submitBtn.disabled = false;
+    submitBtn.innerText = "INVIA GETTONE";
+    alert("GETTONE INSERITO! 🎮");
+  } else {
+    alert("INSERISCI NICK E IDEA!");
   }
+});
+
+// 3. LEGGI RICHIESTE (Hall of Fame + Home Feed)
+const q = query(collection(db, "richieste"), orderBy("data", "desc"));
+onSnapshot(q, (snapshot) => {
+  if (!snapshot.empty) hallBadge.style.display = "block";
   sociList.innerHTML = "";
-  snapshot.forEach((doc) => {
-    const data = doc.data();
+  homeFeed.innerHTML = "";
+
+  snapshot.forEach((docSnap, index) => {
+    const data = docSnap.data();
     const li = document.createElement("li");
     const pNum = data.playerPos
       ? String(data.playerPos).padStart(3, "0")
       : "???";
 
-    let sText = "[WAITING]";
-    let sClass = "status-0";
+    let sText = "[W]",
+      sClass = "status-0";
     if (data.status === 1) {
-      sText = "[LOADING...]";
+      sText = "[L]";
       sClass = "status-1";
     } else if (data.status === 2) {
-      sText = "[ONLINE! ✅]";
+      sText = "[O]";
       sClass = "status-2";
     }
 
-    li.innerHTML = `<span class="p-num">P${pNum}.</span> <span class="p-nick">${data.utente}</span> - <span class="p-idea">${data.idea}</span> <span class="status-tag ${sClass}">${sText}</span>`;
-    sociList.appendChild(li);
+    const content = `<div><span class="p-num">P${pNum}</span> <b>${data.utente}</b>: ${data.idea}</div> <span class="status-tag ${sClass}">${sText}</span>`;
+    li.innerHTML = content;
+
+    sociList.appendChild(li); // Hall of Fame
+    if (index < 5) homeFeed.appendChild(li.cloneNode(true)); // Home Feed (ultimi 5)
   });
 });
 
-submitBtn.addEventListener("click", async () => {
-  const nome = nameField.value.trim().toUpperCase();
-  const suggestion = inputField.value.trim().toUpperCase();
-  if (nome && suggestion) {
-    submitBtn.innerText = "...";
-    submitBtn.disabled = true;
-    try {
-      const snap = await getCountFromServer(collection(db, "richieste"));
-      await addDoc(collection(db, "richieste"), {
-        utente: nome,
-        idea: suggestion,
-        playerPos: snap.data().count + 1,
-        status: 0,
-        data: serverTimestamp(),
-      });
-      nameField.value = "";
-      inputField.value = "";
-      submitBtn.innerText = "OK!";
-      setTimeout(() => {
-        submitBtn.innerText = "INVIA GETTONE";
-        submitBtn.disabled = false;
-      }, 2000);
-    } catch (e) {
-      alert("ERRORE!");
-      submitBtn.disabled = false;
-    }
-  }
-});
+// MODALE LOGICA
+hallBtn.onclick = () => {
+  hallModal.style.display = "block";
+  hallBadge.style.display = "none";
+};
+closeBtn.onclick = () => (hallModal.style.display = "none");
+window.onclick = (e) => {
+  if (e.target == hallModal) hallModal.style.display = "none";
+};

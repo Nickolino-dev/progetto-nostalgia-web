@@ -13,18 +13,35 @@
   <body class="admin-body">
     <div class="arcade-container admin-panel">
       <h1 class="pixel-title" style="font-size: 0.8rem">ADMIN DASHBOARD</h1>
-      <p style="font-size: 0.4rem; color: #ff00ff; margin-bottom: 20px">
-        GESTIONE GETTONI REAL-TIME
-      </p>
 
-      <ul id="adminList" class="soci-list admin-list"></ul>
-
-      <button
-        onclick="window.location.href = 'index.html'"
-        class="hall-btn"
-        style="margin-top: 20px"
+      <div
+        style="border: 2px solid #00ffff; padding: 10px; margin-bottom: 20px"
       >
-        TORNA AL SITO
+        <label style="font-size: 0.4rem; color: #00ffff"
+          >UPDATE FOLLOWERS:</label
+        ><br />
+        <input
+          type="number"
+          id="newFollowers"
+          class="arcade-input"
+          style="width: 70%; margin: 10px 0"
+        />
+        <button
+          id="updateScoreBtn"
+          class="start-btn"
+          style="padding: 5px; font-size: 0.4rem"
+        >
+          OK
+        </button>
+      </div>
+
+      <p style="font-size: 0.4rem; color: #ff00ff; margin-bottom: 10px">
+        LISTA PLAYER:
+      </p>
+      <ul id="adminList" class="soci-list"></ul>
+
+      <button onclick="window.location.href = 'index.html'" class="hall-btn">
+        ESCI
       </button>
     </div>
     <script type="module" src="admin.js"></script>
